@@ -1,3 +1,15 @@
 .bar {
   padding-bottom: 80px;
+
+}
+
+.movie {
+  display: inline-block;
+  padding-left: 200px;
+  padding-bottom: 40px;
+  width: 350px;
+}
+
+.image {
+  max-height: 400px;
 }

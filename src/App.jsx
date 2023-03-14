@@ -11,7 +11,6 @@ export default function App() {
     </header>
     <main>
       <Routes>
-
         <Route path="/" element={<MoviePage />} />
       </Routes>
     </main>
