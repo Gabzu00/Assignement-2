@@ -5,11 +5,33 @@
 
 .movie {
   display: inline-block;
-  padding-left: 200px;
   padding-bottom: 40px;
-  width: 350px;
+  width: 370px;
+
+  border-style: solid;
+  position: relative;
+  left: 5%;
+  margin: 10px;
+}
+
+.centerItems {
+  position: relative;
+  left: 50px;
+  padding-top: 15px;
+
 }
 
 .image {
+  max-width: 280px;
   max-height: 400px;
+  padding-bottom: 20px;
+}
+
+.movieButtons {
+  font-size: 15px;
+}
+
+#bookButton {
+  position: relative;
+  left: 10px;
 }
