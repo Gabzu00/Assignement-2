@@ -8,11 +8,12 @@ export default function MainMenu() {
     <div className="bar">
       <Navbar className="position-absolute top-0 start-0 w-100" bg="dark" variant="dark" expand="lg" fixed="top">
         <Container fluid>
-          <Navbar.Brand expand="lg" href="#home">Feature Flicks</Navbar.Brand>
+          <Navbar.Brand expand="lg" href="/">Feature Flicks</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="/">Movies</Nav.Link>
+              <Nav.Link href="/Screenings">Screenings</Nav.Link>
               <NavDropdown title="Booking" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

@@ -26,11 +26,11 @@ export default function MoviePage() {
   }, []);
 
 
-
   return (
     <>
+      <h1 className="Title">These are the movies beeing shown</h1>
       {movies.map(({ id, title, description }) => <Movie
-        key={id}
+        id={id}
         title={title}
         description={description}
       />)}

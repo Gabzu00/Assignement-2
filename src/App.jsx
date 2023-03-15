@@ -1,9 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 
-
 import MainMenu from './MainMenu';
 import MoviePage from './MoviePage';
-import ScreeningInfo from './ScreeningInfo';
+import Screenings from './Screenings'
 
 export default function App() {
   return <>
@@ -13,7 +12,7 @@ export default function App() {
     <main>
       <Routes>
         <Route path="/" element={<MoviePage />} />
-        {/* <Route path="/ScreeningInfo" element={< ScreeningInfo />} /> */}
+        <Route path="/Screenings" element={<Screenings />} />
       </Routes>
     </main>
   </>
