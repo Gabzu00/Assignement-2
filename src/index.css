@@ -39,4 +39,6 @@
 .Title {
   position: relative;
   left: 90px;
+  max-width: max-content;
+  width: auto;
 }

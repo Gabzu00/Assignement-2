@@ -10,21 +10,8 @@ import Movie from './Movie';
 //              |
 //              v
 
-export default function MoviePage() {
-
-  // A variable that will contain a list of movies
-  const [movies, setMovies] = useState([]);
-
-  // Run this function when the component mounts
-  useEffect(() => {
-    // Self-executing asyncronous anonomyous function
-    (async () => {
-      // Fetch all the movies from the REST api
-      // and store them in the state variable movies
-      setMovies(await (await (fetch('/api/movies'))).json());
-    })();
-  }, []);
-
+export default function MoviePage(props) {
+  const movies = props.movies;
 
   return (
     <>

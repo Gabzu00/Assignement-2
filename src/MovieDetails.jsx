@@ -19,8 +19,6 @@ export default function ScreeningInfo(props) {
     })();
   }, []);
 
-  console.log(title)
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
