@@ -42,3 +42,16 @@
   max-width: max-content;
   width: auto;
 }
+
+.card {
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.screeningImage {
+  max-height: 120px;
+}
+
+.Instructions {
+  text-align: center;
+}

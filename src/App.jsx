@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import MainMenu from './MainMenu';
 import MoviePage from './MoviePage';
 import Screenings from './Screenings'
+import BookingPage from './BookingPage';
 
 export default function App() {
 
@@ -41,6 +42,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MoviePage movies={movies} />} />
         <Route path="/Screenings" element={<Screenings movies={movies} screenings={screenings} />} />
+        <Route path="/BookingPage" element={<BookingPage />} />
       </Routes>
     </main>
 
