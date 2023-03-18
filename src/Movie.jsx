@@ -6,8 +6,6 @@ import MovieDetails from './MovieDetails';
 
 export default function Movie(props) {
 
-
-
   // Destructure props into separate variables
   let { title, description, id } = props;
   let { posterImage } = description;
