@@ -8,7 +8,6 @@ export default function Screenings(props) {
   const movies = props.movies;
   const screenings = props.screenings;
   const sendMovies = props.movies;
-  /* console.log(screenings); */
 
   let movieDates = [...new Set(screenings.map(screenings => screenings.time))]
   let datesOnly = movieDates.map(date => new Date(date).toLocaleString('sv-SE', { weekday: "long", year: "numeric", month: "numeric", day: "numeric" }))
@@ -17,12 +16,12 @@ export default function Screenings(props) {
   let categories = [...new Set(movies.flatMap(movie => movie.description.categories))];
 
   const [selectedCategory, setSelectedCategory] = useState(null);
-
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
-
-  console.log(selectedCategory)
+  const filteredMovies = selectedCategory ?
+    movies.filter(movie => movie.description.categories.includes(selectedCategory)) :
+    movies;
 
 
   return (
@@ -41,58 +40,60 @@ export default function Screenings(props) {
         </label>
       </div>
 
-      {noDuplicateDates.map((date, index) => {
-        const filteredMovies = selectedCategory ?
-          movies.filter(movie => movie.description.categories.includes(selectedCategory)) :
-          movies;
-        return (
-          <div key={index}>
-            <Card className="card" style={{ width: '50rem' }}>
-              <Card.Body>
-                <Card.Title>{new Date(date).toLocaleString('sv-SE', { year: "numeric", month: "numeric", day: "numeric", weekday: "long" })}</Card.Title>
-                {screenings
-                  .filter((screening) => new Date(screening.time).toLocaleDateString() === new Date(date).toLocaleDateString())
-                  .map((screening) => (
-                    <div key={screening.id}>
-                      <Link
-                        to={{
-                          pathname: "/BookingPage",
-                        }}
-                        state={{ sendMovies: sendMovies }}
-                        style={{ textDecoration: 'none' }}>
-                        <Table striped bordered hover>
-                          <thead>
-                            <tr>
-                              <th>Poster</th>
-                              <th>Title</th>
-                              <th>Movie length</th>
-                              <th>Screenings times</th>
-                            </tr>
-                          </thead>
-                          <tbody >
-                            {/* Replace the hardcoded table rows with data specific to each screening */}
-                            {filteredMovies
-                              .filter((movie) => movie.id === screening.movieId)
-                              .map((movie, index) => (
-                                <tr key={movie.id} >
-                                  <td>
-                                    <img className="screeningImage" src={'https://cinema-rest.nodehill.se/' + movie.description.posterImage}></img>
-                                  </td>
-                                  <td>{movie.title}</td>
-                                  <td>{movie.description.length} minutes</td>
-                                  <td>Starting: {new Date(screening.time).toLocaleString('sv-SE', { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</td>
-                                </tr>
-                              ))}
-                          </tbody>
-                        </Table>
-                      </Link>
-                    </div>
-                  ))}
-              </Card.Body>
-            </Card>
-          </div>
-        )
-      })}
+      {noDuplicateDates
+        .map((date, index) => {
+          return (
+            screenings
+              .filter((screening) => new Date(screening.time).toLocaleDateString() === new Date(date).toLocaleDateString())
+              .map((screening) => (
+                filteredMovies
+                  .filter((movie) => movie.id === screening.movieId)
+                  .map((movie, index) => (
+                    <Card className="card" style={{ width: '50rem' }}>
+                      <Card.Body>
+                        <Card.Title>{new Date(date).toLocaleString('sv-SE', { year: "numeric", month: "numeric", day: "numeric", weekday: "long" })}</Card.Title>
+                        <div key={index}>
+                          <div key={screening.id}>
+                            <Link
+                              to={{
+                                pathname: "/BookingPage",
+                              }}
+                              state={{ sendMovies: sendMovies }}
+                              style={{ textDecoration: 'none' }}>
+                              <Table striped bordered hover>
+                                <thead>
+                                  <tr>
+                                    <th>Poster</th>
+                                    <th>Title</th>
+                                    <th>Movie length</th>
+                                    <th>Screenings times</th>
+                                  </tr>
+                                </thead>
+                                <tbody >
+                                  {/* Replace the hardcoded table rows with data specific to each screening */}
+                                  <tr key={movie.id} >
+                                    <td>
+                                      <img className="screeningImage" src={'https://cinema-rest.nodehill.se/' + movie.description.posterImage}></img>
+                                    </td>
+                                    <td>{movie.title}</td>
+                                    <td>{movie.description.length} minutes</td>
+                                    <td>Starting: {new Date(screening.time).toLocaleString('sv-SE', { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</td>
+                                  </tr>
+                                </tbody>
+                              </Table>
+                            </Link>
+
+
+                          </div>
+
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  ))
+              ))
+          )
+        })}
+
     </div>
   );
 }
