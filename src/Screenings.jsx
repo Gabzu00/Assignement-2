@@ -19,6 +19,7 @@ export default function Screenings(props) {
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
+
   const filteredMovies = selectedCategory ?
     movies.filter(movie => movie.description.categories.includes(selectedCategory)) :
     movies;
@@ -42,58 +43,70 @@ export default function Screenings(props) {
 
       {noDuplicateDates
         .map((date, index) => {
+          const moviesForDate = filteredMovies.filter((movie) => {
+            const screeningsForMovie = screenings.filter((screening) => screening.movieId === movie.id);
+            const screeningsForDate = screeningsForMovie.filter((screening) => new Date(screening.time).toLocaleDateString() === new Date(date).toLocaleDateString());
+            return screeningsForDate.length > 0;
+          });
+
+          if (moviesForDate.length === 0) {
+            return null;
+          }
+
           return (
-            screenings
-              .filter((screening) => new Date(screening.time).toLocaleDateString() === new Date(date).toLocaleDateString())
-              .map((screening) => (
-                filteredMovies
-                  .filter((movie) => movie.id === screening.movieId)
-                  .map((movie, index) => (
-                    <Card className="card" style={{ width: '50rem' }}>
-                      <Card.Body>
-                        <Card.Title>{new Date(date).toLocaleString('sv-SE', { year: "numeric", month: "numeric", day: "numeric", weekday: "long" })}</Card.Title>
-                        <div key={index}>
-                          <div key={screening.id}>
-                            <Link
-                              to={{
-                                pathname: "/BookingPage",
-                              }}
-                              state={{ sendMovies: sendMovies }}
-                              style={{ textDecoration: 'none' }}>
-                              <Table striped bordered hover>
-                                <thead>
-                                  <tr>
-                                    <th>Poster</th>
-                                    <th>Title</th>
-                                    <th>Movie length</th>
-                                    <th>Screenings times</th>
-                                  </tr>
-                                </thead>
-                                <tbody >
-                                  {/* Replace the hardcoded table rows with data specific to each screening */}
-                                  <tr key={movie.id} >
-                                    <td>
-                                      <img className="screeningImage" src={'https://cinema-rest.nodehill.se/' + movie.description.posterImage}></img>
-                                    </td>
-                                    <td>{movie.title}</td>
-                                    <td>{movie.description.length} minutes</td>
-                                    <td>Starting: {new Date(screening.time).toLocaleString('sv-SE', { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</td>
-                                  </tr>
-                                </tbody>
-                              </Table>
-                            </Link>
+            <Card className="card" style={{ width: '50rem' }} key={index}>
+              <Card.Body>
+                <Card.Title>{new Date(date).toLocaleString('sv-SE', { year: "numeric", month: "numeric", day: "numeric", weekday: "long" })}</Card.Title>
+                {screenings
+                  .filter((screening) => new Date(screening.time).toLocaleDateString() === new Date(date).toLocaleDateString())
+                  .map((screening) => {
+                    const movie = filteredMovies.find((movie) => movie.id === screening.movieId);
 
+                    if (!movie) {
+                      return null;
+                    }
 
-                          </div>
+                    /* if (selectedCategory !== "" && movie.category !== selectedCategory) {
+                      return null;
+                    } */
 
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  ))
-              ))
-          )
+                    return (
+                      <div key={screening.id}>
+                        <Link
+                          to={{
+                            pathname: "/BookingPage",
+                          }}
+                          state={{ sendMovies: sendMovies }}
+                          style={{ textDecoration: 'none' }}>
+                          <Table striped bordered hover>
+                            <thead>
+                              <tr>
+                                <th>Poster</th>
+                                <th>Title</th>
+                                <th>Movie length</th>
+                                <th>Screenings times</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {/* Replace the hardcoded table rows with data specific to each screening */}
+                              <tr key={movie.id}>
+                                <td>
+                                  <img className="screeningImage" src={'https://cinema-rest.nodehill.se/' + movie.description.posterImage}></img>
+                                </td>
+                                <td>{movie.title}</td>
+                                <td>{movie.description.length} minutes</td>
+                                <td>Starting: {new Date(screening.time).toLocaleString('sv-SE', { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</td>
+                              </tr>
+                            </tbody>
+                          </Table>
+                        </Link>
+                      </div>
+                    );
+                  })}
+              </Card.Body>
+            </Card>
+          );
         })}
-
     </div>
   );
 }
