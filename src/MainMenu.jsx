@@ -14,17 +14,17 @@ export default function MainMenu() {
             <Nav className="me-auto">
               <Nav.Link href="/">Movies</Nav.Link>
               <Nav.Link href="/Screenings">Screenings</Nav.Link>
-              <NavDropdown title="Booking" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
+
+              <NavDropdown title="Ticket" id="basic-nav-dropdown">
+                <div>
+                  Hello
+                </div>
+                {/* <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>  */}
               </NavDropdown>
+
             </Nav>
           </Navbar.Collapse>
         </Container>

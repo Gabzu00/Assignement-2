@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 export default function Screenings(props) {
   const movies = props.movies;
   const screenings = props.screenings;
-  const sendMovies = props.movies;
 
   let movieDates = [...new Set(screenings.map(screenings => screenings.time))]
   let datesOnly = movieDates.map(date => new Date(date).toLocaleString('sv-SE', { weekday: "long", year: "numeric", month: "numeric", day: "numeric" }))
@@ -66,17 +65,13 @@ export default function Screenings(props) {
                       return null;
                     }
 
-                    /* if (selectedCategory !== "" && movie.category !== selectedCategory) {
-                      return null;
-                    } */
-
                     return (
                       <div key={screening.id}>
                         <Link
                           to={{
                             pathname: "/BookingPage",
                           }}
-                          state={{ sendMovies: sendMovies }}
+                          state={{ movies: movies, screening: screening.id }}
                           style={{ textDecoration: 'none' }}>
                           <Table striped bordered hover>
                             <thead>
