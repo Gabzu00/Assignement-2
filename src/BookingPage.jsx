@@ -1,17 +1,25 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from 'react';
 import { useStates } from './utilities/states';
+import { Button } from "react-bootstrap";
+import React, { useState } from 'react';
+import Ticket from './Ticket';
 
+
+let sendSeates = []
 export default function BookingPage() {
   const location = useLocation();
   const movies = location.state.movies;
   const screeningId = location.state.screening;
+
 
   const s = useStates({
     screening: null,
     moveie: null,
     seats: []
   });
+
+
 
   useEffect(() => {
     (async () => {
@@ -59,10 +67,21 @@ export default function BookingPage() {
   }, []);
 
   function toggleSeatSelection(seat) {
+    console.log(seat.seatNumber + " this seat !!!")
     // do nothing if occupied
     if (seat.occupied) { return; }
     // select if not selected, deselect if selected
     seat.selected = !seat.selected;
+    console.log(sendSeates + " Hello seats")
+    if (seat.selected) {
+      sendSeates.push(seat.seatNumber);
+    } else {
+      let index = sendSeates.indexOf(seat.seatNumber);
+      if (index > -1) {
+        sendSeates.splice(index, 1);
+      }
+    }
+
   }
 
   // output the seats
@@ -89,5 +108,26 @@ export default function BookingPage() {
         </div>)}
       </div><br /></>)}
     </div>
+    <Link to={{
+      pathname: "/Ticket",
+
+    }}
+      state={{
+        sendSeates: sendSeates, formattedDate: new Intl.DateTimeFormat('sv-SE', {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        }).format(new Date(s.screening.screeningTime))
+      }}
+
+    >
+      <Button size="lg" className="bookButton" >Book seats</Button>
+    </Link>
+
+
+
   </div>;
 }

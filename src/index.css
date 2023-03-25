@@ -66,10 +66,12 @@
 
 .screening-and-seats {
   text-align: center;
+
 }
 
 .seats {
   text-align: center;
+
 }
 
 .seats>.row {
@@ -84,7 +86,7 @@
   padding-top: 3px;
   border-top-left-radius: 25%;
   border-top-right-radius: 25%;
-  width: 30px;
+  width: 4vw;
   height: 30px;
   margin: 3px 1px;
   cursor: pointer;
@@ -104,8 +106,45 @@
 .poster-screen {
   width: 350px;
   object-fit: cover;
-  aspect-ratio: 20 / 17;
+  aspect-ratio: 20 / 13;
   border: 5px solid #fff;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+
+.bookButton {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ticketDiv {
+  width: 60%;
+  margin: auto;
+  text-align: center;
+}
+
+.infoDiv {
+  display: inline-block;
+}
+
+.seatNumber {
+  padding-left: 15px;
+
+}
+
+.info {
+  padding-top: 70px;
+}
+
+.yourSeats {
+  padding-top: 50px;
+}
+
+.bookingNumber {
+  padding-top: 50px;
+}
+
+.goBack {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

@@ -5,6 +5,7 @@ import MainMenu from './MainMenu';
 import MoviePage from './MoviePage';
 import Screenings from './Screenings'
 import BookingPage from './BookingPage';
+import Ticket from './Ticket';
 
 export default function App() {
 
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/" element={<MoviePage movies={movies} />} />
         <Route path="/Screenings" element={<Screenings movies={movies} screenings={screenings} />} />
         <Route path="/BookingPage" element={<BookingPage />} />
+        <Route path="/Ticket" element={<Ticket />} />
       </Routes>
     </main>
 
